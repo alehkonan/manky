@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Manky
 
-## Getting Started
+Manky is a web application for learning words — building and drilling vocabulary
+to help you memorize new words and their meanings.
 
-First, run the development server:
+> The project is in an early stage; the UI is still a placeholder while the
+> foundations are being put in place.
+
+## Tech stack
+
+- **[Next.js](https://nextjs.org) 16** (App Router) with **React 19** and **TypeScript**.
+- **[oxlint](https://oxc.rs)** for linting and **oxfmt** for formatting.
+- **[pnpm](https://pnpm.io)** as the package manager.
+- **PostgreSQL 18** as the database (run via Docker Compose).
+- **Docker** multi-stage build producing a minimal standalone image.
+
+> **Note on Next.js:** this project pins a version of Next.js with breaking
+> changes from the widely known releases — APIs, conventions, and file structure
+> may differ. The bundled guides under `node_modules/next/dist/docs/` are the
+> source of truth; see `AGENTS.md` for details.
+
+## Getting started
+
+Install dependencies and start the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app. The page
+auto-updates as you edit files under `app/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start the development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Run the production build (`next start`) |
+| `pnpm lint` | Lint with oxlint |
+| `pnpm lint:fix` | Lint and auto-fix |
+| `pnpm fmt` | Format with oxfmt |
 
-## Learn More
+## Docker
 
-To learn more about Next.js, take a look at the following resources:
+The app and a PostgreSQL database are defined in `docker-compose.yml`. Provide
+a `.env` file with `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`, then:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker compose up --build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The app is served on [http://localhost:3000](http://localhost:3000) and Postgres
+is exposed on port `5301`.
 
-## Deploy on Vercel
+### Standalone output
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The Docker build sets `BUILD_STANDALONE=1`, which enables Next.js
+`output: "standalone"` and emits a self-contained server bundle
+(`.next/standalone`) for a small runtime image. This flag is off by default so
+that `pnpm start` (`next start`) keeps working locally, since `next start` is
+incompatible with standalone output. See `next.config.ts`.
