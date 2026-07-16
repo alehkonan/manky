@@ -7,9 +7,7 @@ const globalForDb = globalThis as unknown as { pool?: Pool };
 function createPool(): Pool {
   const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB } = process.env;
   if (!POSTGRES_USER || !POSTGRES_PASSWORD || !POSTGRES_DB) {
-    throw new Error(
-      "POSTGRES_USER, POSTGRES_PASSWORD and POSTGRES_DB must be set",
-    );
+    throw new Error("POSTGRES_USER, POSTGRES_PASSWORD and POSTGRES_DB must be set");
   }
   return new Pool({
     // Host/port default to a local Postgres; inside docker-compose the web

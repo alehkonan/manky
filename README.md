@@ -33,14 +33,14 @@ auto-updates as you edit files under `app/`.
 
 ### Scripts
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the development server |
-| `pnpm build` | Build for production |
-| `pnpm start` | Run the production build (`next start`) |
-| `pnpm lint` | Lint with oxlint |
-| `pnpm lint:fix` | Lint and auto-fix |
-| `pnpm fmt` | Format with oxfmt |
+| Command         | Description                             |
+| --------------- | --------------------------------------- |
+| `pnpm dev`      | Start the development server            |
+| `pnpm build`    | Build for production                    |
+| `pnpm start`    | Run the production build (`next start`) |
+| `pnpm lint`     | Lint with oxlint                        |
+| `pnpm lint:fix` | Lint and auto-fix                       |
+| `pnpm fmt`      | Format with oxfmt                       |
 
 ## Docker
 
