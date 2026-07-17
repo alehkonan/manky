@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt"
+    "fmt": "oxfmt",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "kafkajs": "^2.2.4",
