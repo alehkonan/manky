@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mkdir -p .claude/skills; for d in .agents/skills/*/; do [ -d \"$d\" ] || continue; name=$(basename \"$d\"); [ -e \".claude/skills/$name\" ] || ln -s \"../../.agents/skills/$name\" \".claude/skills/$name\"; done"
+          }
+        ]
+      }
+    ]
+  }
+}
